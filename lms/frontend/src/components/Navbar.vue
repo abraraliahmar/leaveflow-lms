@@ -22,10 +22,10 @@
 
       <!-- User menu -->
       <div class="flex items-center gap-3">
-        <div class="text-right hidden sm:block">
+        <RouterLink to="/profile" class="text-right hidden sm:block hover:opacity-80 transition-opacity">
           <p class="text-sm font-medium text-gray-900">{{ auth.user?.name }}</p>
-          <p class="text-xs text-gray-500 capitalize">{{ auth.user?.role }}</p>
-        </div>
+          <p class="text-xs text-gray-500 capitalize">{{ auth.user?.role }} · My Profile</p>
+        </RouterLink>
         <button @click="handleLogout" class="btn-secondary text-xs py-1.5">
           Logout
         </button>

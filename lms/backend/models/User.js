@@ -33,6 +33,14 @@ const userSchema = new mongoose.Schema(
       trim: true,
       default: '',
     },
+    securityQuestion: {
+      type: String,
+      default: '',
+    },
+    securityAnswer: {
+      type: String,
+      default: '',
+    },
   },
   { timestamps: true }
 );
