@@ -56,6 +56,6 @@ function handleLogout() {
   @apply px-3 py-1.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all;
 }
 .nav-link-active {
-  @apply text-primary-600 bg-primary-50 dark:bg-primary-900/30 dark:text-primary-400 hover:bg-primary-50 hover:text-primary-600;
+@apply text-blue-600 bg-blue-50 hover:bg-blue-50 hover:text-blue-600;
 }
 </style>
