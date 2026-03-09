@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const { authenticate } = require('../middleware/auth');
+const { sendWelcomeEmail } = require('../utils/email');
 
 // Helper: generate JWT
 const generateToken = (userId) => {
@@ -43,6 +44,9 @@ router.post(
       const hashedAnswer = await bcrypt.hash(securityAnswer.toLowerCase().trim(), 10);
       const user = await User.create({ name, email, password, role, department, securityQuestion, securityAnswer: hashedAnswer });
       const token = generateToken(user._id);
+
+      // Send welcome email (non-blocking)
+      sendWelcomeEmail({ email: user.email, name: user.name, role: user.role });
 
       res.status(201).json({
         message: 'Registration successful',

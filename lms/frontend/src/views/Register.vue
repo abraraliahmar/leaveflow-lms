@@ -1,5 +1,17 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-primary-50 to-white py-12">
+  <div class="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-primary-50 to-white dark:from-gray-900 dark:to-gray-950 py-12">
+
+    <!-- Success Modal -->
+    <div v-if="showSuccess" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
+      <div class="card p-8 max-w-sm w-full text-center animate-bounce-in">
+        <div class="text-6xl mb-4">🎉</div>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-display mb-2">Registration Successful!</h2>
+        <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Your account has been created. Redirecting you to login...</p>
+        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
+          <div class="bg-primary-600 h-1.5 rounded-full animate-shrink"></div>
+        </div>
+      </div>
+    </div>
     <div class="w-full max-w-md">
       <div class="text-center mb-8">
         <span class="text-5xl">📅</span>
@@ -145,6 +157,7 @@ const router = useRouter()
 
 const showPassword = ref(false)
 const showConfirmPassword = ref(false)
+const showSuccess = ref(false)
 
 const securityQuestions = [
   "What was the name of your first pet?",
@@ -205,7 +218,8 @@ async function handleRegister() {
   loading.value = true
   try {
     await auth.register(form.value)
-    router.push('/dashboard')
+    showSuccess.value = true
+    setTimeout(() => router.push('/login'), 3000)
   } catch (err) {
     if (err.response?.data?.errors) {
       validationErrors.value = err.response.data.errors

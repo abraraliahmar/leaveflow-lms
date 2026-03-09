@@ -10,9 +10,9 @@ export const useAuthStore = defineStore('auth', () => {
   const isEmployee = computed(() => user.value?.role === 'employee')
   const isEmployer = computed(() => user.value?.role === 'employer')
 
+  // Register — does NOT auto login, just returns success
   async function register(data) {
     const res = await api.post('/auth/register', data)
-    setAuth(res.data.token, res.data.user)
     return res.data
   }
 
